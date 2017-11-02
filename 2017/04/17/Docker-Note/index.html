@@ -1,0 +1,1290 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hundun" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. Install on CentOSRequires Kernel 3.0+, and update library before install Install on CentOS Guidance 2. Introduction2.1 Usagecontainer, isolate applicationspackaged with all its dependencies and lib">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Note">
+<meta property="og:url" content="http://yoursite.com/2017/04/17/Docker-Note/index.html">
+<meta property="og:site_name" content="Hundun">
+<meta property="og:description" content="1. Install on CentOSRequires Kernel 3.0+, and update library before install Install on CentOS Guidance 2. Introduction2.1 Usagecontainer, isolate applicationspackaged with all its dependencies and lib">
+<meta property="og:updated_time" content="2017-05-25T09:27:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker Note">
+<meta name="twitter:description" content="1. Install on CentOSRequires Kernel 3.0+, and update library before install Install on CentOS Guidance 2. Introduction2.1 Usagecontainer, isolate applicationspackaged with all its dependencies and lib">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/17/Docker-Note/"/>
+
+
+
+
+
+  <title>Docker Note | Hundun</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hundun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">日凿一窍,七日而混沌死</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/Docker-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jingyi Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hundun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker Note</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T18:59:05+08:00">
+                2017-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/17/Docker-Note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/17/Docker-Note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,086
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Install-on-CentOS"><a href="#1-Install-on-CentOS" class="headerlink" title="1. Install on CentOS"></a>1. Install on CentOS</h2><p>Requires Kernel 3.0+, and update library before install</p>
+<p><a href="https://docs.docker.com/engine/installation/linux/centos/" target="_blank" rel="external">Install on CentOS Guidance</a></p>
+<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><h3 id="2-1-Usage"><a href="#2-1-Usage" class="headerlink" title="2.1 Usage"></a>2.1 Usage</h3><p>container, isolate applications<br>packaged with all its dependencies and libraries(environment)</p>
+<a id="more"></a>
+<h3 id="2-2-Workflow"><a href="#2-2-Workflow" class="headerlink" title="2.2 Workflow"></a>2.2 Workflow</h3><ol>
+<li>Get codes and dependencies tio container</li>
+<li>Configure network or storage(optional)</li>
+<li>Upload builds to a registry</li>
+<li>Swarm cluster and scale(optional)</li>
+<li>Deploy</li>
+</ol>
+<p>A kind of <em>namespace</em> tool?<br>Concentrates on 调度 and 编排 ？</p>
+<h3 id="2-3-Structure"><a href="#2-3-Structure" class="headerlink" title="2.3 Structure"></a>2.3 Structure</h3><h4 id="2-3-1-Components"><a href="#2-3-1-Components" class="headerlink" title="2.3.1 Components"></a>2.3.1 Components</h4><ul>
+<li>Docker Client<br>UI, communicate with Daemon</li>
+<li>Docker Daemon<br>sits on host, answers request</li>
+<li>Docker Index<br>centralized registry</li>
+</ul>
+<h4 id="2-3-2-Elements"><a href="#2-3-2-Elements" class="headerlink" title="2.3.2 Elements"></a>2.3.2 Elements</h4><ul>
+<li>Docker Containers<br>responsible for app’s running, including OS, user files and meta data</li>
+<li>Docker Images<br>read-only templates, help launch Docker containers</li>
+<li>DOckerFile<br>file housing instructions, help automate image creation</li>
+</ul>
+<p><a href="http://blog.flux7.com/hs-fs/hub/411552/file-1222264954-png/blog-files/image-1.png?t=1476806838474&amp;width=696&amp;height=392&amp;name=image-1.png" target="_blank" rel="external">Docker Structure</a></p>
+<h4 id="2-3-3-Support-by-OS"><a href="#2-3-3-Support-by-OS" class="headerlink" title="2.3.3 Support by OS"></a>2.3.3 Support by OS</h4><ul>
+<li>Namespaces<br>first level of isolation</li>
+<li>Control Groups<br>a part of LXC(Linux Control), an OS level virtualization method for running multiple isolated Linux systems(containers)</li>
+<li>UnionFS<br>file system</li>
+</ul>
+<p>docker namespaces –&gt; namespaces –&gt; physical memory ?</p>
+<h4 id="2-3-4-Docker-Registry"><a href="#2-3-4-Docker-Registry" class="headerlink" title="2.3.4 Docker Registry"></a>2.3.4 Docker Registry</h4><p>Shelve progress:</p>
+<p><a href="http://dockone.io/article/104" target="_blank" rel="external">Docker入门教程（四）Docker Registry</a></p>
+<p>And official doc and guide:<br><a href="https://www.docker.com/sites/default/files/RA_CI%20with%20Docker_08.25.2015.pdf" target="_blank" rel="external">RA_CI with Docker</a></p>
+<p><a href="https://docs.docker.com/engine/tutorials/dockerizing/" target="_blank" rel="external">Hello world in a container</a></p>
+<h2 id="3-Official-getstarted"><a href="#3-Official-getstarted" class="headerlink" title="3. Official getstarted"></a>3. Official getstarted</h2><h3 id="3-1-starter"><a href="#3-1-starter" class="headerlink" title="3.1 starter"></a>3.1 starter</h3><ol>
+<li><p>run a hello world to check<br>run: create &amp; run a container<br>hello-world: image to load into the container<br><del>option -rm means ..</del></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run hello-word</div></pre></td></tr></table></figure>
+</li>
+<li><p>list all containers<br>image: is a filesystem and parameters to use at runtime<br>doesn’t have state and never changes<br>Container: a running instance of an image</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker ps -a</div></pre></td></tr></table></figure>
+</li>
+<li><p>Find image in Docker Hub<br><a href="https://hub.docker.com/explore/" target="_blank" rel="external">Docker Hub</a></p>
+</li>
+<li><p>Build your own image</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ touch Dockerfile</div><div class="line">Contents:</div><div class="line">FROM docker/whalesay:latest</div><div class="line">RUN apt-get -y update &amp;&amp; apt-get install -y fortunes</div><div class="line">CMD /usr/games/fortune -a | cowsay</div><div class="line"></div><div class="line">Then build an image from Dockerfile:</div><div class="line">$ docker build -t docker-whale .</div><div class="line"></div><div class="line">The procedure:</div><div class="line">1. Docker check things available: send context to Docker daemon</div><div class="line">2. load image defined in FROM</div><div class="line">3. RUN</div><div class="line">4. CMD</div></pre></td></tr></table></figure>
+</li>
+<li><p>Push image to Hub/repository<br>sign up for Docker Hub<br>create a repository for image<br>push image to online</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker tag 292ad9b8d884 skyvoice/docker-whale:latest</div><div class="line">$ docker login</div><div class="line">$ docker push skyvoice/docker-whale</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="3-2-Manage-images"><a href="#3-2-Manage-images" class="headerlink" title="3.2 Manage images"></a>3.2 Manage images</h3><ol>
+<li><p>list images</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker images</div></pre></td></tr></table></figure>
+</li>
+<li><p>remove image</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker rmi -f 7d9495d03763</div><div class="line">$ docker rmi -f docker-whale</div></pre></td></tr></table></figure>
+</li>
+<li><p>daemonized container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">query Docker daemon, list containers</div><div class="line">[docker@dockermount docker]$ docker ps</div><div class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS               NAMES</div><div class="line">657b964200ef        ubuntu              &quot;/bin/sh -c &apos;while tr&quot;   About a minute ago   Up About a minute                       suspicious_kilby</div><div class="line">Or add flag -l, show only last container started.</div><div class="line">add flag -a, show all containers.</div><div class="line">add flag -q, show container ids only.</div><div class="line"></div><div class="line">We can use NAME of this container to query execution logs:</div><div class="line">[docker@dockermount docker]$ docker logs suspicious_kilby</div><div class="line">It looks inside the container, and shows the standard output of a container.</div><div class="line"></div><div class="line">And to stop this container:</div><div class="line">[docker@dockermount docker]$ docker stop suspicious_kilby</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="3-3-Run-container"><a href="#3-3-Run-container" class="headerlink" title="3.3 Run container"></a>3.3 Run container</h3><ol>
+<li><p>Run command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run ubuntu /bin/echo &apos;hello ubuntu&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Run interactive container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -t -i ubuntu /bin/bash</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>-t assigns a pseudo-tty or terminal inside the container<br>-i grabd teh standard input[STDIN] of the container, allow you to make an interactive connection</p>
+<h3 id="3-4-Run-application"><a href="#3-4-Run-application" class="headerlink" title="3.4 Run application"></a>3.4 Run application</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">See port mapping:</div><div class="line">$ docker port #name 5000</div><div class="line"></div><div class="line">View logs:</div><div class="line">$ docker logs -f #name</div><div class="line"></div><div class="line">List processes:</div><div class="line">$ docker top #name</div><div class="line"></div><div class="line">Stop and remove</div><div class="line">$ docker stop #name</div><div class="line">$ docker rm #name</div><div class="line"></div><div class="line">Remove all container:</div><div class="line">$ docker rm $(docker ps -aq)</div></pre></td></tr></table></figure>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><blockquote>
+<p>Removing a container is final(cannot undo)</p>
+</blockquote>
+<h3 id="3-5-Network-container"><a href="#3-5-Network-container" class="headerlink" title="3.5 Network container"></a>3.5 Network container</h3><ol>
+<li><p>Name your container:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -d -P --name web training/webapp python app.py</div></pre></td></tr></table></figure>
+</li>
+<li><p>Docker provides two network drivers: <em>bridge</em>(Default) and <em>overlay</em>.<br>Use <em>network</em> sub command to list them:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker network ls</div></pre></td></tr></table></figure>
+</li>
+<li><p>View Network info of container:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[docker@dockermount ~]$ docker network inspect bridge</div></pre></td></tr></table></figure>
+</li>
+<li><p>Create your own network:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[docker@dockermount ~]$ docker network create -d bridge my-bridge-net</div></pre></td></tr></table></figure>
+</li>
+<li><p>Connect your newly running container to this network:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[docker@dockermount ~]$ docker network connect my-bridge-net web</div></pre></td></tr></table></figure>
+</li>
+<li><p>Then try <em>ping</em> each other in two containers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker exec -it db bash</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Note-1"><a href="#Note-1" class="headerlink" title="Note"></a>Note</h4><blockquote>
+<p>You can attach many network to a container, but two containers can reach other only in the same network</p>
+</blockquote>
+<h3 id="3-6-Manage-data-in-container"><a href="#3-6-Manage-data-in-container" class="headerlink" title="3.6 Manage data in container"></a>3.6 Manage data in container</h3><h4 id="Data-volume"><a href="#Data-volume" class="headerlink" title="Data volume"></a>Data volume</h4><p>A specially-designed directory, within one or more containers that bypasses the Union File System(operates by creating layers, making them very lightweight and fast)<br>Designed to persist data, even container is removed</p>
+<p>Add a data volume to container:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[docker@dockermount ~]$ docker run -d -P --name web -v /webapp training/webapp python app.py</div></pre></td></tr></table></figure></p>
+<p><strong>To be continue….</strong></p>
+<h3 id="3-7-Docker-Certicates-for-both-daemon-and-client"><a href="#3-7-Docker-Certicates-for-both-daemon-and-client" class="headerlink" title="3.7 Docker Certicates for both daemon and client"></a>3.7 Docker Certicates for both daemon and client</h3><p>For detailed procedures:<br><a href="https://docs.docker.com/engine/security/https/" target="_blank" rel="external">Protect the Docker daemon socker</a></p>
+<h4 id="Note-2"><a href="#Note-2" class="headerlink" title="Note"></a>Note</h4><blockquote>
+<p>By default, Docker runs via a non-networked Unix socket. Config using an HTTP socket if you need communicate.</p>
+<p>$HOST in the doc is the ip addr of daemon server, not dns</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo subjectAltName = IP:10.200.157.84,IP:10.200.157.48,IP:127.0.0.1 &gt; extfile.cnf</div></pre></td></tr></table></figure>
+<p>To integrate with Spring boot on Windows, plz install docker-install.exe and DockerToolbox-1.12.2.exe. They will auto create a vm with installed docker.<br>[Update 2016-11-15]<br>Boot2docker cannot push images into Hub, for unknown reason.<br>Use Linux Docker daemon server instead.</p>
+<p>Connect to docker VM by docker/tcuser</p>
+<h2 id="4-Notice"><a href="#4-Notice" class="headerlink" title="4. Notice"></a>4. Notice</h2><h3 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3><ol>
+<li><p>containers are immutable<br>same image tested by QA will reach production environment with same behaviour</p>
+</li>
+<li><p>container are lightweight<br>memory footprint of it is small</p>
+</li>
+<li><p>container are fast<br>DO NOT treat containers as virtual machines</p>
+</li>
+</ol>
+<h3 id="Mentra"><a href="#Mentra" class="headerlink" title="Mentra"></a>Mentra</h3><ol>
+<li>containers are disposable/ephemeral</li>
+</ol>
+<h3 id="Try-to-Avoid"><a href="#Try-to-Avoid" class="headerlink" title="Try to Avoid"></a>Try to Avoid</h3><ol>
+<li>dont store data</li>
+<li>dont ship application in two pieces</li>
+<li>dont crate large images<br>dont install unnecessary packages or run “update” </li>
+<li>dont use a single layer image<br>use layered filesystem, username definition, runtime installation, configuration and then application<br>easier to recreate, manage and distribute</li>
+<li>dont create images from running containers</li>
+<li>dont use only “lastest” tag<br>like “SNAPSHOT”, unsafe and irretrievable</li>
+<li>dont run more than on process in a single container</li>
+<li>dont store credentials in image<br>use environment variables</li>
+<li>dont run processes as root</li>
+<li>dont rely on IP addresses<br>use environment variables</li>
+</ol>
+<p><strong>Reference:</strong><br><a href="http://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/" target="_blank" rel="external">10 things to avoid in docker containers</a></p>
+<h3 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h3><ol>
+<li><p>Try new Tech at low cost<br>Using images in the Hub</p>
+</li>
+<li><p>Test and run with consistency</p>
+</li>
+<li><p>Build a dev environment </p>
+</li>
+</ol>
+<h2 id="To-Be-continue"><a href="#To-Be-continue" class="headerlink" title="To Be continue"></a>To Be continue</h2><p><a href="https://docs.docker.com/engine/tutorials/dockervolumes/" target="_blank" rel="external">Manage data in container</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/01/Hexos-hello-world/" rel="next" title="Hexos Hello World">
+                <i class="fa fa-chevron-left"></i> Hexos Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/23/Integrate-Spring-Boot-with-Docker/" rel="prev" title="Integrate Spring Boot with Docker">
+                Integrate Spring Boot with Docker <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jingyi Yang" />
+          <p class="site-author-name" itemprop="name">Jingyi Yang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Install-on-CentOS"><span class="nav-text">1. Install on CentOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Introduction"><span class="nav-text">2. Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Usage"><span class="nav-text">2.1 Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Workflow"><span class="nav-text">2.2 Workflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Structure"><span class="nav-text">2.3 Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-Components"><span class="nav-text">2.3.1 Components</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-Elements"><span class="nav-text">2.3.2 Elements</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-Support-by-OS"><span class="nav-text">2.3.3 Support by OS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-4-Docker-Registry"><span class="nav-text">2.3.4 Docker Registry</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Official-getstarted"><span class="nav-text">3. Official getstarted</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-starter"><span class="nav-text">3.1 starter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Manage-images"><span class="nav-text">3.2 Manage images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Run-container"><span class="nav-text">3.3 Run container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Run-application"><span class="nav-text">3.4 Run application</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Network-container"><span class="nav-text">3.5 Network container</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note-1"><span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Manage-data-in-container"><span class="nav-text">3.6 Manage data in container</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-volume"><span class="nav-text">Data volume</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-Docker-Certicates-for-both-daemon-and-client"><span class="nav-text">3.7 Docker Certicates for both daemon and client</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note-2"><span class="nav-text">Note</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Notice"><span class="nav-text">4. Notice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantages"><span class="nav-text">Advantages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mentra"><span class="nav-text">Mentra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-to-Avoid"><span class="nav-text">Try to Avoid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Benefits"><span class="nav-text">Benefits</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-Be-continue"><span class="nav-text">To Be continue</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jingyi Yang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://hundun.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/04/17/Docker-Note/';
+          this.page.identifier = '2017/04/17/Docker-Note/';
+          this.page.title = 'Docker Note';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://hundun.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

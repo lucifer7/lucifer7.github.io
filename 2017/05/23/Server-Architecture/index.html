@@ -1,0 +1,1296 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OS,Architecture," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hundun" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. Scalable Computing/Analysis1.1 Three architecture ?1.1.1 Shared-Nothing versus Shared-Everything Patterns for Distributed or Parallel computing big problems, break it down, computing unit which pat">
+<meta name="keywords" content="OS,Architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Server Architecture">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/Server-Architecture/index.html">
+<meta property="og:site_name" content="Hundun">
+<meta property="og:description" content="1. Scalable Computing/Analysis1.1 Three architecture ?1.1.1 Shared-Nothing versus Shared-Everything Patterns for Distributed or Parallel computing big problems, break it down, computing unit which pat">
+<meta property="og:image" content="http://images.cnitblog.com/blog/90573/201404/131651286223938.jpg">
+<meta property="og:updated_time" content="2017-05-23T08:54:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Server Architecture">
+<meta name="twitter:description" content="1. Scalable Computing/Analysis1.1 Three architecture ?1.1.1 Shared-Nothing versus Shared-Everything Patterns for Distributed or Parallel computing big problems, break it down, computing unit which pat">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/90573/201404/131651286223938.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/23/Server-Architecture/"/>
+
+
+
+
+
+  <title>Server Architecture | Hundun</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hundun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">日凿一窍,七日而混沌死</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/Server-Architecture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jingyi Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hundun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Server Architecture</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T16:44:16+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/23/Server-Architecture/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/23/Server-Architecture/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  865
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-Scalable-Computing-Analysis"><a href="#1-Scalable-Computing-Analysis" class="headerlink" title="1. Scalable Computing/Analysis"></a>1. Scalable Computing/Analysis</h3><h4 id="1-1-Three-architecture"><a href="#1-1-Three-architecture" class="headerlink" title="1.1 Three architecture ?"></a>1.1 Three architecture ?</h4><h5 id="1-1-1-Shared-Nothing-versus-Shared-Everything"><a href="#1-1-1-Shared-Nothing-versus-Shared-Everything" class="headerlink" title="1.1.1 Shared-Nothing versus Shared-Everything"></a>1.1.1 Shared-Nothing versus Shared-Everything</h5><ul>
+<li>Patterns for Distributed or Parallel computing</li>
+<li>big problems, break it down, computing unit</li>
+<li>which pattern to use<br>trader-off between compute and communication costs</li>
+</ul>
+<p>MPP?</p>
+<a id="more"></a>
+<h5 id="1-1-2-Shared-Memory"><a href="#1-1-2-Shared-Memory" class="headerlink" title="1.1.2 Shared-Memory"></a>1.1.2 Shared-Memory</h5><ol>
+<li>single machine, multiple processes<br>Apply in:</li>
+</ol>
+<ul>
+<li>GPU-based parallel-computing architecture</li>
+<li>Deep Learning</li>
+</ul>
+<ol>
+<li>multiple machines<br>RDMA (Remote direct memory access)<br>data-center network<br>warehouse-scale computing</li>
+</ol>
+<p>NUMA?</p>
+<h5 id="1-1-3-Shared-Storage"><a href="#1-1-3-Shared-Storage" class="headerlink" title="1.1.3 Shared-Storage"></a>1.1.3 Shared-Storage</h5><ul>
+<li>in 80’s, NFS/DFS/Andrew</li>
+<li>today, SAN/NAS/Virtualized storage</li>
+</ul>
+<h3 id="2-Core-elements-in-architecture"><a href="#2-Core-elements-in-architecture" class="headerlink" title="2. Core elements in architecture"></a>2. Core elements in architecture</h3><p>架构核心要素，思维导图<br><img src="http://images.cnitblog.com/blog/90573/201404/131651286223938.jpg" alt="架构核心五要素"></p>
+<p>Ref Book:<br><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B00F3Z26G8?ie=UTF8&amp;SubscriptionId=AKIAJOMEZLLKFEWYT4PQ&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00F3Z26G8&amp;linkCode=xm2&amp;tag=z08-23" target="_blank" rel="external">大型网站技术架构</a></p>
+<h3 id="3-Server-Architecture"><a href="#3-Server-Architecture" class="headerlink" title="3. Server Architecture"></a>3. Server Architecture</h3><h4 id="3-1-服务器三大体系结构"><a href="#3-1-服务器三大体系结构" class="headerlink" title="3.1 服务器三大体系结构"></a>3.1 服务器三大体系结构</h4><p>Three architecture for business server</p>
+<ol>
+<li>Symmetric Multi-Processing (SMP)  <strong>主流服务器架构</strong></li>
+</ol>
+<p><strong>对称多处理架构</strong>：多个CPU对称工作，无主次或从属关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Share same physical memory, access to any address takes same time</div><div class="line">Thus is also called: 一致存储访问结构</div><div class="line">Uniform Memory Access (UMA)  </div><div class="line">Feature: sharing</div><div class="line">Extension: more memory, faster CPU, more CPU, more i/o, more device</div><div class="line">Defect: extension limited</div><div class="line">Best practice: 2-4 CPUs</div></pre></td></tr></table></figure>
+<ol>
+<li>Massively Parallel Processing (MPP)</li>
+</ol>
+<ul>
+<li>海量并行处理结构: 多个SMP服务器（节点）互联而成</li>
+<li>完全无共享结构(Share Nothing)</li>
+<li>Thus：扩展能力最好，目前512个节点，数千个CPU</li>
+</ul>
+<ol>
+<li>Non-Uniform Memory Access (NUMA)</li>
+</ol>
+<ul>
+<li>非一致存储访问结构</li>
+<li>Feature: 多个CPU模块，每个模块多个CPU</li>
+<li>独立内存，I/O</li>
+<li>通过互联模块（eg. crossbar switch) 连接和信息交互</li>
+<li>支持上百个CPU</li>
+<li>Defects：远地内存延时太多</li>
+<li><p>系统性能无法线性增加</p>
+<p>MPP vs. NUMA</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th style="text-align:left">MPP</th>
+<th style="text-align:left">NUMA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>节点互联机制</td>
+<td style="text-align:left">I/O</td>
+<td style="text-align:left">inside same physical server</td>
+</tr>
+<tr>
+<td>内存访问机制</td>
+<td style="text-align:left">access only local</td>
+<td style="text-align:left">access to all, remote delays</td>
+</tr>
+<tr>
+<td>Usage</td>
+<td style="text-align:left">data warehouse, i/o</td>
+<td style="text-align:left">OLTP, little data, fast processing</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a href="http://server.51cto.com/sCollege-198840.htm" target="_blank" rel="external">服务器三大体系SMP、NUMA、MPP介绍</a></p>
+<p><a href="https://blogs.technet.microsoft.com/dataplatforminsider/2014/07/30/transitioning-from-smp-to-mpp-the-why-and-the-how/" target="_blank" rel="external">Transitioning from SMP to MPP, the why and the how</a></p>
+<p><a href="http://www.embedded.com/design/mcus-processors-and-socs/4429496/Multicore-basics" target="_blank" rel="external">Multi core basics: AMP and SMP</a></p>
+<p><a href="https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshwarch.htm" target="_blank" rel="external">Cluster Hardware Architecture</a></p>
+</blockquote>
+<h4 id="3-2-多核系统三大架构"><a href="#3-2-多核系统三大架构" class="headerlink" title="3.2 多核系统三大架构"></a>3.2 多核系统三大架构</h4><ol>
+<li><p>SMP<br>每个CPU内核运行一个独立的操作系统或同一操作系统的独立实例（instantiation）</p>
+</li>
+<li><p>Asymmetric Multi-Processing (AMP)</p>
+</li>
+</ol>
+<ul>
+<li>非对称多处理架构</li>
+<li>一个操作系统的实例可以同时管理所有CPU内核，且应用并不绑定某一个内核</li>
+</ul>
+<p>AMP vs. SMP</p>
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th style="text-align:left">AMP</th>
+<th style="text-align:left">SMP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>耦合</td>
+<td style="text-align:left">松耦合多CPU系统</td>
+<td style="text-align:left">紧耦合多CPU系统</td>
+</tr>
+<tr>
+<td>OS</td>
+<td style="text-align:left">one CPU, one OS</td>
+<td style="text-align:left">multi CPU, share one OS</td>
+</tr>
+<tr>
+<td>Apply</td>
+<td style="text-align:left">less</td>
+<td style="text-align:left">more</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Bound Multi-Processing (BMP)</li>
+</ol>
+<ul>
+<li>混合多处理架构</li>
+<li>一个操作系统的实例可以同时管理所有CPU内核，但每个应用被锁定于某个指定的核心</li>
+</ul>
+<h4 id="3-3-补充"><a href="#3-3-补充" class="headerlink" title="3.3 补充"></a>3.3 补充</h4><blockquote>
+<p>Seemingly, SMP(UMP), NUMP and MPP refers to CPU and RAM architecture</p>
+<p>And SMP, AMP, BMP refers to CPU and OS architecture</p>
+</blockquote>
+<p>Intel 用了很牛的技术  SMT （同步多线程），一个CPU同时可以执行两个线程，如双核CPU可以有4个逻辑处理器</p>
+<p> <strong>SMT(Simultaneous Multi-threading)</strong><br>Def: Permits multiple independent threads to execute <em>simultaneously</em> on the SAME core.<br>Weaving together multiple “threads” on the same core </p>
+<p>SMT v.s. Hyper Threading<br>SMT: an architecture feature of some processors<br>allows multiple thread to issue instructions on each cycle(same time ?)<br>Hyper-Threading is a specific implementation of SMT.</p>
+<h3 id="4-Design-of-System"><a href="#4-Design-of-System" class="headerlink" title="4 Design of System"></a>4 Design of System</h3><h4 id="4-1-Building-block"><a href="#4-1-Building-block" class="headerlink" title="4.1 Building block"></a>4.1 Building block</h4><p><strong>decomposition and combination</strong><br>分解和组合</p>
+<ol>
+<li><p>System bus<br>系统总线<br>separate producer and consumer</p>
+</li>
+<li><p>Routing<br>路由<br>external route: different input –&gt; |dispatch| –&gt; component<br>internal route: service level, eg.consul, way like pattern matching</p>
+</li>
+</ol>
+<p><strong>Mind data</strong><br>Identify its ID before reaching Bus, called data normalization/data encapsulation </p>
+<ol>
+<li><p>Queue<br>A special version of bus + route[optional] + storage  ?<br>amends for the speed collapse of consumer and producer</p>
+<ol>
+<li><p>Pub/Sub<br>An candidate for route<br>Managed by Publisher</p>
+</li>
+<li><p>Protocol<br>To communicate though bus or queue, we need a <strong>protocol</strong> to define behaviour.<br>like an SLA, service level agreement</p>
+</li>
+</ol>
+<h4 id="4-2-vital-services"><a href="#4-2-vital-services" class="headerlink" title="4.2 vital services"></a>4.2 vital services</h4><ol>
+<li><p>sweeping<br>代谢<br>exception close, restart, restore…<br>eg. supervisor/child process in erlang, supervision tree(like nginx)</p>
+</li>
+<li><p>High Availability</p>
+</li>
+<li><p>Security<br>divide into initiative and passive(主动安全与被动安全)<br>Initiative: authentication/authorization + TLS + encrypt + minimum input/output<br>Passive: firewall</p>
+</li>
+</ol>
+</li>
+<li><p>Overdraft protection<br>透支保护<br>auto scaling/back pressure/Service degradation</p>
+</li>
+</ol>
+<p>Reference:<br><a href="http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;mid=207078329&amp;idx=1&amp;sn=14070c2bc5f24af58e951c8a926964e0#rd" target="_blank" rel="external">软件设计杂谈</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/Spring-Cloud-Modules/" rel="next" title="Spring Cloud Modules">
+                <i class="fa fa-chevron-left"></i> Spring Cloud Modules
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/23/CPU-and-Cache/" rel="prev" title="CPU and Cache">
+                CPU and Cache <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jingyi Yang" />
+          <p class="site-author-name" itemprop="name">Jingyi Yang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Scalable-Computing-Analysis"><span class="nav-text">1. Scalable Computing/Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Three-architecture"><span class="nav-text">1.1 Three architecture ?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-Shared-Nothing-versus-Shared-Everything"><span class="nav-text">1.1.1 Shared-Nothing versus Shared-Everything</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-Shared-Memory"><span class="nav-text">1.1.2 Shared-Memory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-Shared-Storage"><span class="nav-text">1.1.3 Shared-Storage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Core-elements-in-architecture"><span class="nav-text">2. Core elements in architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Server-Architecture"><span class="nav-text">3. Server Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-服务器三大体系结构"><span class="nav-text">3.1 服务器三大体系结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-多核系统三大架构"><span class="nav-text">3.2 多核系统三大架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-补充"><span class="nav-text">3.3 补充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Design-of-System"><span class="nav-text">4 Design of System</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-Building-block"><span class="nav-text">4.1 Building block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-vital-services"><span class="nav-text">4.2 vital services</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jingyi Yang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://hundun.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/23/Server-Architecture/';
+          this.page.identifier = '2017/05/23/Server-Architecture/';
+          this.page.title = 'Server Architecture';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://hundun.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
