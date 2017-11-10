@@ -94,3 +94,8 @@ sitemap:
   path: sitemap.xml
 
 
+# hexo-admin authentification
+admin:
+  username: lucifer7
+  password_hash: $2a$10$ecL.tu7HcIp/YLnCCbt/gu.7WIvgdOAKZM9TCCjaKTtotquccMRNa
+  secret: quick fox jumps over red box

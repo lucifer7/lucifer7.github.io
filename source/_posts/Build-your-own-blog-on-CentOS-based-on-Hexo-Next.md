@@ -1,7 +1,8 @@
----
 title: 'Build your own blog on CentOS, based on Hexo + Next'
-date: 2017-11-02 10:21:54
-tags: Hexo
+tags:
+  - Hexo
+categories: []
+date: 2017-11-02 10:21:00
 ---
 ## Prepare environment
 ### Add yum repo

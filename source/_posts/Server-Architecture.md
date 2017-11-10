@@ -1,9 +1,9 @@
----
 title: Server Architecture
-date: 2017-05-23 16:44:16
 tags:
- - Architecture
- - OS
+  - OS
+  - Architecture
+categories: []
+date: 2017-05-23 16:44:00
 ---
 ### 1. Scalable Computing/Analysis
 #### 1.1 Three architecture ?
@@ -93,12 +93,12 @@ Best practice: 2-4 CPUs
 
 #### 3.2 多核系统三大架构
 1. SMP
-每个CPU内核运行一个独立的操作系统或同一操作系统的独立实例（instantiation）
+- 一个操作系统的实例可以同时管理所有CPU内核，且应用并不绑定某一个内核
 
 2. Asymmetric Multi-Processing (AMP)
 
 - 非对称多处理架构
-- 一个操作系统的实例可以同时管理所有CPU内核，且应用并不绑定某一个内核
+- 每个CPU内核可能运行一个独立的操作系统或同一操作系统的独立实例（instantiation）
 
 AMP vs. SMP
 
@@ -114,9 +114,14 @@ AMP vs. SMP
 - 一个操作系统的实例可以同时管理所有CPU内核，但每个应用被锁定于某个指定的核心
 
 #### 3.3 补充
-> Seemingly, SMP(UMP), NUMP and MPP refers to CPU and RAM architecture
+> Seemingly, SMP(UMA), NUMA and MPP refers to CPU and RAM architecture
 
 > And SMP, AMP, BMP refers to CPU and OS architecture
+
+> More on 17-09-29:    
+SMP: multiprocessor computer hardware and software architecture    
+UMA: a shared memory architecture used in parallel computers    
+UMA may use bus-based SMP arch or crossbar switches
 
 Intel 用了很牛的技术  SMT （同步多线程），一个CPU同时可以执行两个线程，如双核CPU可以有4个逻辑处理器
 
