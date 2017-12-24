@@ -146,7 +146,7 @@ $ yum makecache
 and ***dhclient*** if necessary
 
 ### 5. 防火墙问题
-Visit tomcaat at http://192.168.1.15:8080/ failed.
+Visit tomcat at http://192.168.1.15:8080/ failed.
 Caused by firewall, stop or disable it:
 
 ```

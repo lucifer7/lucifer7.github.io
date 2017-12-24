@@ -346,6 +346,7 @@ han: true
 #duoshuo_shortname:
 
 # Disqus
+# shortname is WebsiteName!!
 disqus:
   enable: true
   shortname: hundun
