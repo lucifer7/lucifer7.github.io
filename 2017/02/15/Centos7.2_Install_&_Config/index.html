@@ -90,7 +90,7 @@
 <meta property="og:description" content="1. 手动分区1234/boot   for 200m ext4swap    for 2G  swap/home   for 2G  ext4/       the rest">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://note.youdao.com/yws/res/6333/WEBRESOURCEd58258c0dd3dd6a0359d32824e9c7ced">
-<meta property="og:updated_time" content="2017-12-25T11:54:38.414Z">
+<meta property="og:updated_time" content="2017-12-25T15:42:04.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7.2 Install &amp; Config">
 <meta name="twitter:description" content="1. 手动分区1234/boot   for 200m ext4swap    for 2G  swap/home   for 2G  ext4/       the rest">
@@ -468,7 +468,7 @@
 <p>Try this:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum clean all</span><br><span class="line">$ yum makecache</span><br></pre></td></tr></table></figure>
 <p>and <strong><em>dhclient</em></strong> if necessary</p>
-<h3 id="5-防火墙问题"><a href="#5-防火墙问题" class="headerlink" title="5. 防火墙问题"></a>5. 防火墙问题</h3><p>Visit tomcaat at <a href="http://192.168.1.15:8080/" target="_blank" rel="noopener">http://192.168.1.15:8080/</a> failed.<br>Caused by firewall, stop or disable it:</p>
+<h3 id="5-防火墙问题"><a href="#5-防火墙问题" class="headerlink" title="5. 防火墙问题"></a>5. 防火墙问题</h3><p>Visit tomcat at <a href="http://192.168.1.15:8080/" target="_blank" rel="noopener">http://192.168.1.15:8080/</a> failed.<br>Caused by firewall, stop or disable it:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
 <p>OR<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl disable firewalld.service</span><br><span class="line">Removed symlink /etc/systemd/system/basic.target.wants/firewalld.service.</span><br><span class="line">Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.</span><br></pre></td></tr></table></figure></p>
 <p>OR 允许8080端口流量通过</p>
@@ -622,7 +622,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -633,7 +633,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -644,7 +644,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -720,7 +720,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.0k</span>
+    <span title="Site words total count">11.7k</span>
   
 </div>
 
