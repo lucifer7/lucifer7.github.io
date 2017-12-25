@@ -23,7 +23,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "Hundun, Jingyi.Yang"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -348,7 +348,7 @@ han: true
 # Disqus
 disqus:
   enable: true
-  shortname: jingyiyang
+  shortname: hundun
   count: true
 
 # Hypercomments
