@@ -2,7 +2,7 @@ title: Note of Functional Thinking
 author: Jingyi Yang
 tags:
   - Functional Programming
-categories: []
+categories: [Book Notes]
 date: 2018-03-26 10:12:00
 ---
 The best way to get perfect work is to present it to people repeatedly. Some relevace or common feature can only be discovered after deeper research and passive thinking.
@@ -18,6 +18,8 @@ By Michael Feathers
 - Resusability    
 OOP: messages between classes
 FP: data struct and workflow ?
+
+<!-- more -->
 
 ### Chap 2 Shift
 #### Difference
